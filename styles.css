@@ -370,19 +370,15 @@ section {
 .pixelated-avatar {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    background-image: url('../assets/pixelated-kiran.png'); /* Add ../ if CSS is in a subfolder */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     border-radius: 20px;
     position: relative;
     image-rendering: pixelated;
 }
 
-.pixelated-avatar::before {
-    content: '';
-    position: absolute;
-    inset: 4px;
-    background: var(--bg-secondary);
-    border-radius: 16px;
-}
 
 .headphone-icon {
     position: absolute;

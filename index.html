@@ -3,319 +3,997 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kiran Sai - Senior Full-Stack Developer</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="assets/pixelated-kiran.png">
+    <title>Kiran Sai — Tech Lead</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #fafafa;
+            --text: #0a0a0a;
+            --text-light: #666;
+            --accent: #0a0a0a;
+            --border: #e5e5e5;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Animated background gradient */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(10,10,10,0.02) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(250, 250, 250, 0.8);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            transform: translateY(0);
+            transition: transform 0.3s;
+        }
+
+        nav.hidden {
+            transform: translateY(-100%);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 40px;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            min-width: 100px;
+            height: 24px;
+            display: inline-block;
+        }
+
+        .logo-text {
+            display: block;
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+
+        .logo-main,
+        .logo-swap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            white-space: nowrap;
+            width: 100%;
+        }
+
+        .logo-main {
+            opacity: 1;
+            animation: logoMainFade 8s ease-in-out infinite;
+        }
+
+        .logo-swap {
+            opacity: 0;
+            animation: logoSwapFade 8s ease-in-out infinite;
+        }
+
+        @keyframes logoMainFade {
+            0%, 40% { 
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0px);
+            }
+            45%, 55% { 
+                opacity: 0;
+                transform: translateY(-8px);
+                filter: blur(4px);
+            }
+            60%, 100% { 
+                opacity: 0;
+                transform: translateY(-10px);
+                filter: blur(4px);
+            }
+        }
+
+        @keyframes logoSwapFade {
+            0%, 40% { 
+                opacity: 0;
+                transform: translateY(10px);
+                filter: blur(4px);
+            }
+            45%, 55% { 
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0px);
+            }
+            60%, 95% { 
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0px);
+            }
+            100% { 
+                opacity: 0;
+                transform: translateY(-8px);
+                filter: blur(4px);
+            }
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            transform: translateX(-100%);
+            animation: slideIn 1s ease-out forwards;
+        }
+
+        @keyframes slideIn {
+            to { transform: translateX(0); }
+        }
+
+        nav ul {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 84px);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 32px;
+            letter-spacing: -0.03em;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #0a0a0a 0%, #666 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 8s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            max-width: 600px;
+        }
+
+        /* Floating metrics */
+        .metrics-float {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 24px;
+            margin: 48px 0;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .metric-item {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .metric-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .metric-item:nth-child(1) { transition-delay: 0.1s; }
+        .metric-item:nth-child(2) { transition-delay: 0.2s; }
+        .metric-item:nth-child(3) { transition-delay: 0.3s; }
+        .metric-item:nth-child(4) { transition-delay: 0.4s; }
+
+        .metric-number {
+            font-size: 32px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .metric-label {
+            font-size: 12px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        /* Scroll animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-fade {
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .scroll-fade.visible {
+            opacity: 1;
+        }
+
+        /* Section */
+        section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 80px;
+            text-align: center;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        /* Experience Cards */
+        .experience-grid {
+            display: grid;
+            gap: 40px;
+        }
+
+        .exp-card {
+            border: 1px solid var(--border);
+            padding: 48px;
+            border-radius: 12px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exp-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--accent);
+            transition: height 0.4s;
+        }
+
+        .exp-card:hover::before {
+            height: 100%;
+        }
+
+        .exp-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border-color: var(--accent);
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 12px;
+            gap: 20px;
+        }
+
+        .exp-title {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .exp-date {
+            font-size: 14px;
+            color: var(--text-light);
+            white-space: nowrap;
+        }
+
+        .exp-company {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        .exp-card ul {
+            list-style: none;
+        }
+
+        .exp-card li {
+            font-size: 15px;
+            color: var(--text-light);
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+            line-height: 1.7;
+        }
+
+        .exp-card li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Skills Grid with hover effect */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 32px;
+        }
+
+        .skill-card {
+            padding: 32px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: white;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .skill-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(10,10,10,0.03), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .skill-card:hover::after {
+            opacity: 1;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+        }
+
+        .skill-card h3 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .skill-card ul {
+            list-style: none;
+        }
+
+        .skill-card li {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .skill-card li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            gap: 48px;
+        }
+
+        .project-card {
+            display: grid;
+            grid-template-columns: 2fr 3fr;
+            gap: 48px;
+            align-items: start;
+            padding: 48px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: white;
+            transition: all 0.4s;
+        }
+
+        .project-card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 16px 32px rgba(0,0,0,0.08);
+            border-color: var(--accent);
+        }
+
+        .project-info h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.01em;
+        }
+
+        .project-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 16px;
+            transition: color 0.3s;
+        }
+
+        .project-link:hover {
+            color: var(--accent);
+        }
+
+        .project-description {
+            font-size: 16px;
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech-tag {
+            padding: 6px 14px;
+            font-size: 12px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 0 40px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-bottom: 60px;
+        }
+
+        .footer-section h3 {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            color: var(--text-light);
+        }
+
+        .contact-links {
+            display: grid;
+            gap: 12px;
+        }
+
+        .contact-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .contact-links a:hover {
+            transform: translateX(4px);
+            color: var(--text-light);
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-light);
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 24px;
+            }
+
+            nav .container {
+                padding: 20px 24px;
+            }
+
+            nav ul {
+                gap: 20px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .metrics-float {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            .exp-card {
+                padding: 32px;
+            }
+
+            .exp-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .project-card {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                padding: 32px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Pixel Noise Overlay -->
-    <div class="pixel-noise"></div>
-    
-    <!-- Sticky Contact Button -->
-    <button class="contact-cta" id="contactBtn">📧 Contact Me</button>
+    <nav id="nav">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-text">
+                    <span class="logo-main">Kiran Sai</span>
+                    <span class="logo-swap">Tech Lead</span>
+                </span>
+            </div>
+            <ul>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
+    <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1 class="pixelated-text" data-text="Hi, I'm Kiran Sai">Hi, I'm Kiran Sai</h1>
-                <p class="tagline pixelated-text" data-text="Senior Full-Stack Developer | Flutter & Backend Specialist | Audiophile">
-                    Senior Full-Stack Developer | Flutter & Backend Specialist | Audiophile
-                </p>
-                <p class="subtext">
-                    Building secure, scalable fintech applications with seamless UI and robust backend systems.
-                </p>
-                <div class="hero-buttons">
-                    <button class="btn-primary" id="exploreBtn">Explore My Work</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <h2 class="section-title pixelated-text" data-text="About Me">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Senior Full-Stack Developer with 4+ years of experience building secure, scalable fintech apps using Flutter, AWS, Python, and Go.</p>
-                    <p>Expert in native integrations and delivering pixel-perfect UI across mobile and web applications.</p>
-                </div>
-                <div class="about-visual">
-                    <div class="avatar-container">
-                        <div class="pixelated-avatar"></div>
-                        <div class="headphone-icon">🎧</div>
+                <h1>Tech Lead building <span class="gradient-text">secure, scalable fintech platforms</span></h1>
+                <p>Leading mobile and backend development with 5+ years of experience in trading systems, real-time architectures, and team leadership</p>
+                
+                <div class="metrics-float" id="metrics">
+                    <div class="metric-item">
+                        <span class="metric-number">5+</span>
+                        <span class="metric-label">Years</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-number">50K+</span>
+                        <span class="metric-label">Daily TXN</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-number">500+</span>
+                        <span class="metric-label">Instruments</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-number">33+</span>
+                        <span class="metric-label">Modules</span>
                     </div>
                 </div>
+
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary">Get in touch</a>
+                    <a href="Kiran_Sai_Tech_Lead_Resume.pdf" class="btn btn-secondary" download>Download Resume</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section class="skills" id="skills">
+    <section id="experience">
         <div class="container">
-            <h2 class="section-title pixelated-text" data-text="Tech Stack">Tech Stack</h2>
+            <div class="section-header scroll-animate">
+                <div class="section-label">Where I've worked</div>
+                <h2 class="section-title">Experience</h2>
+            </div>
+
+            <div class="experience-grid">
+                <div class="exp-card scroll-animate">
+                    <div class="exp-header">
+                        <h3 class="exp-title">Tech Lead – Mobile (Flutter)</h3>
+                        <span class="exp-date">Nov 2025 – Present</span>
+                    </div>
+                    <p class="exp-company">5paisa Capital Ltd</p>
+                    <ul>
+                        <li>Leading <strong>Flutter team of 5 engineers</strong>, owning mobile architecture, code quality, and delivery</li>
+                        <li>Introduced <strong>AI-driven development workflows</strong> with structured context rules</li>
+                        <li>Designed and implemented <strong>CI/CD pipelines</strong>, eliminating manual QA builds</li>
+                        <li>Established <strong>structured branching strategy and PR governance model</strong></li>
+                        <li>Architected <strong>complex trading order forms</strong> with real-time validation logic</li>
+                        <li>Driving <strong>domain-aligned multi-repo architecture</strong> (33+ modules)</li>
+                    </ul>
+                </div>
+
+                <div class="exp-card scroll-animate">
+                    <div class="exp-header">
+                        <h3 class="exp-title">Software Engineer II</h3>
+                        <span class="exp-date">Apr 2023 – Nov 2025</span>
+                    </div>
+                    <p class="exp-company">Credit Saison India</p>
+                    <ul>
+                        <li>Architected <strong>AWS withdrawal system</strong> handling <strong>50K+ daily transactions</strong></li>
+                        <li>Built <strong>Go/Python microservices</strong>, reducing API times by <strong>~50%</strong></li>
+                        <li>Implemented <strong>dual-layer AES & RSA encryption</strong> workflows</li>
+                        <li>Integrated <strong>mission-critical payment gateways and KYC providers</strong></li>
+                        <li>Built <strong>production-grade observability</strong> reducing incident detection time</li>
+                    </ul>
+                </div>
+
+                <div class="exp-card scroll-animate">
+                    <div class="exp-header">
+                        <h3 class="exp-title">Software Engineer I</h3>
+                        <span class="exp-date">Sep 2021 – Mar 2023</span>
+                    </div>
+                    <p class="exp-company">Credit Saison India</p>
+                    <ul>
+                        <li>Established mobile codebase with <strong>scalable Flutter architecture patterns</strong></li>
+                        <li>Designed <strong>backend-driven dynamic onboarding workflows</strong></li>
+                        <li>Built <strong>analytics abstraction layer</strong> for platform switching</li>
+                        <li>Developed <strong>scalable deep-linking and push notification infrastructure</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <div class="section-header scroll-animate">
+                <div class="section-label">Technical Expertise</div>
+                <h2 class="section-title">Skills</h2>
+            </div>
+
             <div class="skills-grid">
-                <div class="skill-chip" data-tooltip="4+ years experience">Dart</div>
-                <div class="skill-chip" data-tooltip="Mobile app development">Flutter</div>
-                <div class="skill-chip" data-tooltip="Enterprise applications">Java</div>
-                <div class="skill-chip" data-tooltip="Backend & automation">Python</div>
-                <div class="skill-chip" data-tooltip="Microservices">Go Lang</div>
-                <div class="skill-chip" data-tooltip="Cloud infrastructure">AWS</div>
-                <div class="skill-chip" data-tooltip="Real-time database">Firebase</div>
-                <div class="skill-chip" data-tooltip="Containerization">Docker</div>
-                <div class="skill-chip" data-tooltip="Software architecture">OOP</div>
-            </div>
-        </div>
-    </section>
+                <div class="skill-card scroll-animate">
+                    <h3>Mobile & Frontend</h3>
+                    <ul>
+                        <li>Flutter & Dart</li>
+                        <li>Real-time UI updates</li>
+                        <li>Stream-based architectures</li>
+                        <li>Performance optimization</li>
+                    </ul>
+                </div>
 
-    <!-- Career Timeline -->
-    <section class="timeline" id="experience">
-        <div class="container">
-            <h2 class="section-title pixelated-text" data-text="Career Journey">Career Journey</h2>
-            <div class="timeline-container">
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Software Engineer II</h3>
-                        <p class="company">Credit Saison India | 04/2023 - Present | Bengaluru</p>
-                        <ul>
-                            <li>Strengthened app security with dual-layer AES & RSA encryption with backend-managed key rotation and in-app key pair generation.</li>
-                            <li>Designed and optimized Go + Python microservices, reducing API response times by 50%.</li>
-                            <li>Architected AWS-based withdrawal orchestration system (SNS, SQS, Lambda) handling 50K+ daily transactions.</li>
-                            <li>Integrated third-party SDKs (payment, KYC, analytics) across frontend and backend.</li>
-                        </ul>
-                    </div>
+                <div class="skill-card scroll-animate">
+                    <h3>Backend & Cloud</h3>
+                    <ul>
+                        <li>Go & Python</li>
+                        <li>AWS (Lambda, SQS, SNS)</li>
+                        <li>Microservices</li>
+                        <li>Event-driven systems</li>
+                    </ul>
                 </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Software Engineer I</h3>
-                        <p class="company">Credit Saison India | 09/2021 - 03/2023 | Bengaluru</p>
-                        <ul>
-                            <li>Implemented deep linking and SMS onboarding, boosting activation by 22%.</li>
-                            <li>Integrated AWS Cognito & Firebase Auth for secure login flows.</li>
-                            <li>Automated Android/iOS releases via CI/CD, reducing deployment time by 70%.</li>
-                            <li>Enabled real-time crash alerts via Firebase Crashlytics and DataDog, reducing critical crashes by ~40%.</li>
-                        </ul>
-                    </div>
+
+                <div class="skill-card scroll-animate">
+                    <h3>FinTech Systems</h3>
+                    <ul>
+                        <li>Secure workflows</li>
+                        <li>Encryption (AES, RSA)</li>
+                        <li>Trading systems</li>
+                        <li>Payment integrations</li>
+                    </ul>
                 </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Flutter Application Developer</h3>
-                        <p class="company">ADSPL | 08/2020 - 08/2021 | Remote</p>
-                        <ul>
-                            <li>Collaborated with clients to refine UI/UX using feedback and analytics.</li>
-                            <li>Optimized Flutter apps, cutting load times up to 50%.</li>
-                            <li>Shipped multiple production apps with consistent cross-device stability.</li>
-                        </ul>
-                    </div>
+
+                <div class="skill-card scroll-animate">
+                    <h3>Leadership & Process</h3>
+                    <ul>
+                        <li>System design & architecture</li>
+                        <li>CI/CD & DevOps</li>
+                        <li>PR governance & code reviews</li>
+                        <li>Branching strategy & Git workflow</li>
+                        <li>Regression testing framework</li>
+                        <li>Technical mentorship</li>
+                        <li>Risk mitigation & delivery</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Achievements -->
-    <section class="achievements" id="achievements">
+    <section id="projects">
         <div class="container">
-            <h2 class="section-title pixelated-text" data-text="Key Achievements">Key Achievements</h2>
-            <div class="achievement-cards">
-                <div class="achievement-card">
-                    <div class="achievement-icon">🏆</div>
-                    <h3>Extra Mile Award</h3>
-                    <p>Reduced app crashes by 40% via proactive refactor and monitoring.</p>
-                </div>
-                <div class="achievement-card">
-                    <div class="achievement-icon">⭐</div>
-                    <h3>Consistent Excellence</h3>
-                    <p>Consistently exceeded OKRs and maintained 4.0+ star performance ratings across review cycles.</p>
-                </div>
+            <div class="section-header scroll-animate">
+                <div class="section-label">Selected work</div>
+                <h2 class="section-title">Projects</h2>
             </div>
-        </div>
-    </section>
 
-    <!-- Professional Projects -->
-    <section class="projects" id="projects">
-        <div class="container">
-            <h2 class="section-title pixelated-text" data-text="Featured Projects">Featured Projects</h2>
             <div class="projects-grid">
-                <div class="project-card professional">
-                    <div class="project-header">
+                <div class="project-card scroll-animate">
+                    <div class="project-info">
                         <h3>GrowLedger</h3>
-                        <span class="project-type">Professional</span>
+                        <a href="https://github.com/jalakamkiran/expense_tracker" target="_blank" class="project-link">View on GitHub →</a>
                     </div>
-                    <p class="project-description">
-                        Offline-first expense tracking app with analytics and receipt generation.
-                    </p>
-                    <div class="tech-stack">
-                        <span>Flutter</span>
-                        <span>Drift</span>
-                        <span>BLoC</span>
-                        <span>Local Storage</span>
-                    </div>
-                    <a href="https://github.com/jalakamkiran/expense_tracker" target="_blank" class="project-link">
-                        View on GitHub →
-                    </a>
-                </div>
-                
-                <div class="project-card professional">
-                    <div class="project-header">
-                        <h3>RutaViva</h3>
-                        <span class="project-type">Backend</span>
-                    </div>
-                    <p class="project-description">
-                        Web service for trip planning, route mapping, budget calculation, real-time itinerary sharing with OLA Maps integration.
-                    </p>
-                    <div class="tech-stack">
-                        <span>Spring Boot</span>
-                        <span>REST APIs</span>
-                        <span>OLA Maps</span>
-                    </div>
-                    <a href="https://github.com/jalakamkiran/RutaVivaUnsecured" target="_blank" class="project-link">
-                        View on GitHub →
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Personal Projects -->
-    <section class="personal-projects" id="personal-projects">
-        <div class="container">
-            <h2 class="section-title pixelated-text" data-text="Personal Experiments">Personal Experiments</h2>
-            <div class="projects-grid">
-                <div class="project-card personal">
-                    <div class="project-header">
-                        <h3>RutaViva Mobile</h3>
-                        <span class="project-type">Flutter + Riverpod</span>
-                    </div>
-                    <p class="project-description">
-                        Flutter mobile app for trip planning with route mapping, budget calculation, real-time itinerary sharing.
-                    </p>
-                    <div class="tech-stack">
-                        <span>Flutter</span>
-                        <span>Riverpod</span>
-                        <span>REST APIs</span>
-                    </div>
-                    <a href="https://github.com/jalakamkiran/RutaVivaUnsecured" target="_blank" class="project-link">
-                        View on GitHub →
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Education -->
-    <section class="education" id="education">
-        <div class="container">
-            <h2 class="section-title pixelated-text" data-text="Education">Education</h2>
-            <div class="education-card">
-                <h3>Electronics and Communications Engineering</h3>
-                <p>Kuppam Engineering College</p>
-                <span class="duration">2016 - 2021</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Languages -->
-    <section class="languages" id="languages">
-        <div class="container">
-            <h2 class="section-title pixelated-text" data-text="Languages">Languages</h2>
-            <div class="language-chips">
-                <div class="language-chip">English</div>
-                <div class="language-chip">Telugu</div>
-                <div class="language-chip">Kannada</div>
-                <div class="language-chip">Tamil</div>
-                <div class="language-chip">Hindi</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Interests -->
-    <section class="interests" id="interests">
-        <div class="container">
-            <h2 class="section-title pixelated-text" data-text="Beyond Code">Beyond Code</h2>
-            <div class="interests-grid">
-                <div class="interest-card">
-                    <div class="interest-icon">🎧</div>
-                    <h3>Audiophile Journey</h3>
-                    <p>Passionate audiophile, constantly exploring original soundtracks and film scores.</p>
-                    <div class="music-list">
-                        <span>How To Train Your Dragon OST</span>
-                        <span>Hans Zimmer</span>
-                        <span>Sinners</span>
-                        <span>RockStar (AR Rahman)</span>
-                        <span>No Words Left (Lucy Rose)</span>
-                        <span>Leo (Anirudh)</span>
-                        <span>Coolie (Anirudh)</span>
+                    <div class="project-details">
+                        <p class="project-description">Offline-first expense tracking app with analytics, receipt generation, and category-based filtering. Built with clean BLoC-based architecture for maintainability and scalability.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Drift</span>
+                            <span class="tech-tag">BLoC</span>
+                            <span class="tech-tag">Local Storage</span>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="interest-card">
-                    <div class="interest-icon">🏔️</div>
-                    <h3>Trekking Adventures</h3>
-                    <p>Exploring the great outdoors, one peak at a time.</p>
-                    <div class="trek-list">
-                        <span>Sandakphu</span>
-                        <span>Triund</span>
-                        <span>Bandaje</span>
-                        <span>Meesapulimalai</span>
-                        <span>KumaraParvata</span>
+
+                <div class="project-card scroll-animate">
+                    <div class="project-info">
+                        <h3>Ruta Viva</h3>
+                        <a href="https://github.com/jalakamkiran/RutaVivaUnsecured" target="_blank" class="project-link">View on GitHub →</a>
+                    </div>
+                    <div class="project-details">
+                        <p class="project-description">Full-stack trip planning platform with route mapping, budget calculations, and real-time itinerary sharing. Mobile app built with Riverpod state management integrated with Spring Boot backend services.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Spring Boot</span>
+                            <span class="tech-tag">Riverpod</span>
+                            <span class="tech-tag">REST APIs</span>
+                            <span class="tech-tag">OLA Maps</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
+    <footer id="contact" class="scroll-fade">
         <div class="container">
-            <h2 class="section-title pixelated-text" data-text="Let's Connect">Let's Connect</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <span class="contact-label">Email:</span>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Let's work together</h3>
+                    <div class="contact-links">
                         <a href="mailto:jalakam.kiran@gmail.com">jalakam.kiran@gmail.com</a>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-label">Phone:</span>
                         <a href="tel:+919353088133">+91 93530 88133</a>
                     </div>
-                    <div class="contact-item">
-                        <span class="contact-label">LinkedIn:</span>
-                        <a href="https://linkedin.com/in/jalakamkiran" target="_blank">linkedin.com/in/jalakamkiran</a>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-label">GitHub:</span>
-                        <a href="https://github.com/jalakamkiran" target="_blank">github.com/jalakamkiran</a>
-                    </div>
                 </div>
-                
-                <div class="terminal-contact">
-                    <div class="terminal-header">
-                        <span>Send Message</span>
-                    </div>
-                    <div class="terminal-body">
-                        <div class="terminal-line">
-                            <span class="prompt">$</span>
-                            <input type="text" placeholder="Type your message..." id="terminalInput">
-                        </div>
-                        <button class="terminal-send" id="sendMessage">Execute</button>
+
+                <div class="footer-section">
+                    <h3>Find me online</h3>
+                    <div class="contact-links">
+                        <a href="https://linkedin.com/in/jalakamkiran" target="_blank">LinkedIn</a>
+                        <a href="https://github.com/jalakamkiran" target="_blank">GitHub</a>
                     </div>
                 </div>
             </div>
+
+            <div class="copyright">
+                © 2026 Kiran Sai — Tech Lead specializing in FinTech & Trading Systems
+            </div>
         </div>
-    </section>
+    </footer>
 
-    <!-- Floating Pixel Bars Background Animation -->
-    <div class="floating-pixels"></div>
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
 
-    <script src="script.js"></script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-animate, .scroll-fade').forEach(function(el) {
+            observer.observe(el);
+        });
+
+        // Metrics animation on load
+        window.addEventListener('load', function() {
+            const metrics = document.querySelectorAll('.metric-item');
+            metrics.forEach(function(metric) {
+                metric.classList.add('visible');
+            });
+        });
+
+        // Hide nav on scroll down
+        let lastScroll = 0;
+        window.addEventListener('scroll', function() {
+            const currentScroll = window.pageYOffset;
+            const nav = document.getElementById('nav');
+            
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                nav.classList.add('hidden');
+            } else {
+                nav.classList.remove('hidden');
+            }
+            lastScroll = currentScroll;
+        });
+    </script>
 </body>
 </html>
